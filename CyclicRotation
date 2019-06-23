@@ -1,0 +1,15 @@
+class Solution {
+ public int[] solution(int[] A, int K) {
+  if (A != null && A.length >= 1) {
+   int temp = 0;
+   for (int j = 1; j <= K; j++) {
+    temp = A[A.length - 1];
+    for (int i = A.length - 2; i >= 0; i--) {
+     A[i + 1] = A[i];
+    }
+    A[0] = temp;
+   }
+  }
+  return A;
+ }
+}
