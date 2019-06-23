@@ -1,0 +1,31 @@
+import java.util.*;
+import java.lang.*;
+import java.util.Collections;
+
+// you can write to stdout for debugging purposes, e.g.
+// System.out.println("this is a debug message");
+
+class Solution {
+ public int solution(int[] A) throws RuntimeException {
+
+  HashMap < Integer, Integer > mine = new HashMap < Integer, Integer > ();
+  for (int i = 0; i < A.length; i++) {
+
+   if (mine.containsKey(A[i])) {
+    int exists = 0;
+    int newval = mine.get(A[i]);
+    mine.put(A[i], newval + 1);
+   } else {
+    mine.put(A[i], 1);
+   }
+  }
+  Set < Integer > test = mine.keySet();
+  for (int key: test) {
+   if (mine.get(key) % 2 == 0)
+    continue;
+   else
+    return key;
+  }
+  throw new RuntimeException();
+ }
+}
