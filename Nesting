@@ -1,0 +1,28 @@
+import java.util.*;
+
+class Solution {
+ public int solution(String S) {
+  // write your code in Java SE 8
+  Stack < String > st = new Stack < String > ();
+  if (S.equals("") || S.equals(" "))
+   return 1;
+  for (int i = 0; i < S.length(); i++) {
+   String Scharat = String.valueOf(S.charAt(i));
+   if ((Scharat).equals("("))
+    st.push((Scharat));
+   else if (!st.empty()) {
+    if ((Scharat).equals(")") & (st.peek()).equals("(")) {
+     st.pop();
+     continue;
+    } else if ((Scharat).equals(")") & (!(st.peek()).equals("("))) {
+     return 0;
+    }
+
+   } else
+    return 0;
+  }
+  if (st.empty())
+   return 1;
+  return 0;
+ }
+}
