@@ -1,0 +1,48 @@
+// you can also use imports, for example:
+import java.util.*;
+
+class Solution {
+ public int solution(int[] H) {
+
+  int count = 0;
+  ArrayList < Integer > ar = new ArrayList < Integer > ();
+  int arindex = 0;
+
+  for (int i = 0; i < H.length; i++) {
+   if (i == 0) 
+   {
+    ar.add(H[i]);
+     } 
+     else {
+     if (ar.size() != 0) {
+      arindex = ar.size() - 1;
+     if (H[i] < ar.get(arindex)) {
+      if (ar.contains(H[i])) {
+       int from = ar.lastIndexOf(H[i]);
+       List < Integer > l = new ArrayList < Integer > (ar.subList(from, ar.size() - 1));
+       Collections.sort(l);
+       if (l.get(0) < H[i])
+        ar.add(H[i]);
+       else {
+        ar.remove(from);
+        ar.add(H[i]);
+        continue;
+       }
+
+      } else {
+       ar.add(H[i]);
+     
+      }
+     }
+     if (H[i] > ar.get(arindex)) {
+      ar.add(H[i]);
+      }
+     if (H[i] == ar.get(arindex)) {
+      continue;
+     }
+    }
+   }
+  }
+  return ar.size();
+ }
+}
