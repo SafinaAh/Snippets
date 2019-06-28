@@ -1,0 +1,42 @@
+import java.util.*;
+
+class Solution {
+ public int solution(int[] A) {
+
+  ArrayList < Integer > ar = new ArrayList < Integer > ();
+  int finalval = -1;
+  int key = 0;
+  int sizelook;
+  if (A.length == 1)
+   return 0;
+
+  if (A.length > 1) {
+   sizelook = A.length / 2;
+  } else return finalval;
+  HashMap < Integer, Integer > hm = new HashMap < Integer, Integer > ();
+  for (int i = 0; i < A.length; i++) {
+   ar.add(A[i]);
+
+   if (hm.containsKey(A[i])) {
+    int occurance = hm.get(A[i]);
+    hm.put(A[i], occurance + 1);
+
+   } else
+    hm.put(A[i], 1);
+  }
+  Collection < Integer > s = hm.values();
+  List < Integer > l = new ArrayList < Integer > (s);
+  Collections.sort(l);
+  for (Map.Entry < Integer, Integer > e: hm.entrySet())
+  {
+   if (e.getValue() == l.get(l.size() - 1)) {
+    key = e.getKey();
+    break;
+
+   }
+  }
+  if (hm.get(key) > sizelook)
+   finalval = ar.lastIndexOf(key);
+  return finalval;
+ }
+}
