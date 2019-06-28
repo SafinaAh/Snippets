@@ -1,0 +1,41 @@
+class Solution {
+ public int solution(int[] A) {
+
+  int max1 = -1001;
+  int prev1max = -1001;
+  int prev2max = -1001;
+  int max11 = 0;
+  int prev1max1 = 0;
+
+  for (int i = 0; i < A.length; i++) {
+   if (A[i] < max11) {
+    prev1max1 = max11;
+    max11 = A[i];
+   } else if (A[i] < prev1max1)
+    prev1max1 = A[i];
+
+   if (A[i] > max1) {
+    prev2max = prev1max;
+    prev1max = max1;
+    max1 = A[i];
+    continue;
+   }
+
+   if (A[i] <= max1 && A[i] > prev1max) {
+    prev2max = prev1max;
+    prev1max = A[i];
+    continue;
+
+   }
+   if (A[i] <= prev1max && A[i] > prev2max) {
+    prev2max = A[i];
+    continue;
+   }
+  }
+  if (prev1max1 != 0 && max11 != 0) {
+   if ((prev1max1 * max11 * max1) > (max1 * prev2max * prev1max))
+    return (prev1max1 * max11 * max1);
+  }
+  return (max1 * prev2max * prev1max);
+ }
+}
