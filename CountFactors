@@ -2,17 +2,17 @@ class Solution {
  public int solution(int N) {
   int sqrt = ((Double) Math.sqrt(N)).intValue();
   int count = 0;
-  while (begin > 0) {
-   if (N % begin == 0) {
-    if (N / begin == begin) {
+  while (sqrt > 0) {
+   if (N % sqrt == 0) {
+
+    if (N / sqrt == sqrt) {
 
      count++;
     } else
      count = count + 2;
    }
-   begin--;
+   sqrt--;
   }
   return count;
-
- }
+  }
 }
