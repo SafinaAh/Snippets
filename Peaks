@@ -1,0 +1,92 @@
+import java.util.*;
+
+
+class Solution {
+ public int solution(int[] A) {
+  ArrayList < Integer > ar = new ArrayList < Integer > ();
+  ArrayList < Integer > sum = new ArrayList < Integer > ();
+  HashMap < Integer, Integer > factors = new HashMap < Integer, Integer > ();
+  if (A.length == 1)
+   return 0;
+  if (A.length == 2)
+   return 0;
+  for (int i = 1; i < A.length - 1; i++) {
+   if ((A[i - 1] < A[i]) && (A[i + 1] < A[i])) {
+    ar.add(i);
+   }
+  }
+  if (ar.size() < 1)
+   return 0;
+
+  if (ar.size() == 1)
+   return 1;
+
+  int N = A.length;
+  int sqrt = ((Double) Math.sqrt(N)).intValue();
+  int count = 0;
+  while (sqrt > 0) {
+   int remanider = N % sqrt;
+   if (remanider == 0) {
+    if (N / sqrt == sqrt) {
+
+     count++;
+    } else {
+     count = count + 2;
+    }
+    factors.put(sqrt, N / sqrt);
+   }
+   sqrt--;
+  }
+
+  for (Map.Entry mapElement: factors.entrySet()) {
+   int key = (Integer) mapElement.getKey();
+   int value = ((int) mapElement.getValue());
+   if (key == 1) {
+    sum.add(1);
+    continue;
+   } else {
+    int itr = 2;
+    while (itr > 0) {
+     int parts = 0;
+     int ele = 0;
+     if (itr == 2) {
+      parts = key;
+      ele = value;
+     } else if (itr == 1) {
+      parts = value;
+      ele = key;
+     }
+     if (parts > ar.size()) {
+      itr--;
+      continue;
+     }
+
+     int taken = 0;
+     count = 0;
+     for (int i = 1; i <= parts; i++) {
+      int elecomp = ele * i;
+      if (elecomp <= A.length) {
+       boolean flagfoundforthispart = false;
+       for (int o = taken; o < ar.size() && taken < ar.size(); o++) {
+        if (ar.get(o) <= (elecomp - 1)) {
+         flagfoundforthispart = true;
+         taken = o + 1;
+         break;
+        }
+       }
+       if (flagfoundforthispart)
+        count++;
+      }
+     }
+     if (count == parts) {
+      sum.add(count);
+     }
+     itr--;
+
+   }
+  }
+}
+  Collections.sort(sum);
+  return sum.get(sum.size() - 1);
+ }
+}
