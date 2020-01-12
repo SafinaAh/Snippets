@@ -1,0 +1,25 @@
+class Solution {
+    public int solution(int N, int M) {
+      
+        int size=0;
+        int x=0;
+        int[] A=new int[N];
+        boolean w=false;
+       if (M == 1) return N;
+       if (M == N) return 1;
+        while(w!=true)
+        {
+            
+            if(((x+M)%N)<N && A[(x+M)%N]!=1)
+            {
+               // System.out.println("here" +A[(x+M)%N]  +x);
+                A[(x+M)%N]=1;
+                size++;
+                x=(x+M)%N;
+            }
+            else
+            w=true;
+        }
+   return size;
+   }
+}
